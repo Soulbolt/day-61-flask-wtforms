@@ -17,7 +17,7 @@ This will install the packages from requirements.txt for this project.
 '''
 # Class to create form with 
 class MyLoginForm(FlaskForm):
-    email = StringField(label='Email', validators=[DataRequired(), Email(allow_smtputf8=True)])
+    email = StringField(label='Email', validators=[DataRequired(), Email()])
     password = PasswordField(label='Password', validators=[DataRequired(), Length(min=8)])
     submit = SubmitField(label='Login')
 
@@ -29,7 +29,7 @@ app.secret_key = "ilh1j3ih12l"
 def home():
     return render_template('index.html')
 
-@app.route("/login")
+@app.route("/login", methods={"GET", "POST"})
 def login():
     login_form = MyLoginForm()  #  create variable to passon login form to html
     login_form.validate_on_submit() # Validates form is properly filled

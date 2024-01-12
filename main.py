@@ -1,7 +1,7 @@
 from flask import Flask, render_template
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Email, Length
 
 '''
 Red underlines? Install the required packages first: 
@@ -17,8 +17,8 @@ This will install the packages from requirements.txt for this project.
 '''
 # Class to create form with 
 class MyLoginForm(FlaskForm):
-    email = StringField(label='Email', validators=[DataRequired()])
-    password = PasswordField(label='Password', validators=[DataRequired()])
+    email = StringField(label='Email', validators=[DataRequired(), Email(allow_smtputf8=True)])
+    password = PasswordField(label='Password', validators=[DataRequired(), Length(min=8)])
     submit = SubmitField(label='Login')
 
 app = Flask(__name__)
